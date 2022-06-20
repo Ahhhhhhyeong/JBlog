@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.UserVo;
 
 @Repository
@@ -24,6 +25,14 @@ public class BlogRepository {
 		map.put("url", "/assets/gallery/default.jpg");		
 		
 		return sqlSession.insert("blog.insertDefault", map) == 1;		
+	}
+
+	public BlogVo getfindAll(String id) {
+		return sqlSession.selectOne("blog.findAll", id);
+	}
+
+	public void updateBasic(BlogVo vo) {
+		sqlSession.update("blog.updateBasic", vo);		
 	}
 
 }

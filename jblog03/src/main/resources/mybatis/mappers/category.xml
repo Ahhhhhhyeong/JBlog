@@ -7,4 +7,12 @@
 				VALUES (#{name }, #{description }, #{blog_id })
 		]]>	
 	</insert>	
+	
+	<select id="findAll" parameterType="string" resultType="categoryvo">
+		<![CDATA[
+			SELECT no, name, description
+			 FROM category
+			where blog_id = #{id }
+		]]>
+	</select>
 </mapper>

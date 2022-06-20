@@ -7,5 +7,23 @@
 				VALUES (#{id }, #{title }, #{url })
 		]]>	
 	</insert>	
+	
+	<select id="findAll" parameterType="string" resultType="blogvo">
+		<![CDATA[
+			SELECT id, title, logo
+			 FROM blog
+			where id = #{id }
+		]]>
+	</select>
+	
+	<update id="updateBasic" parameterType="blogvo">
+		<![CDATA[
+			UPDATE blog SET 
+				title = #{title },
+			    logo = #{logo }
+			WHERE id = #{id }						
+		]]>
+		
+	</update>
 
 </mapper>

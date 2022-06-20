@@ -11,7 +11,7 @@
 			</c:when>
 			<c:otherwise>			
 				<li><a href="${pageContext.request.contextPath }/user/logout">로그아웃</a></li>
-				<li><a href="${pageContext.request.contextPath }/${authUser.id }/main">내블로그</a></li>
+				<li><a href="${pageContext.request.contextPath }/${authUser.id }">내블로그</a></li>
 				<li>${authUser.name }님 반갑습니다.</li>
 			</c:otherwise>
 		</c:choose>
