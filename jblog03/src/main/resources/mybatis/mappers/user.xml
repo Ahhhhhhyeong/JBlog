@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<insert id="insert" parameterType="uservo">
+		<![CDATA[
+			insert
+				into user (id, name, password)
+			values (#{id }, #{name }, #{password })
+		]]>
+		<![CDATA[
+			INSERT INTO blog (id, title, logo) 
+				SELECT a.id, concat(a.name, '의 블로그') as title, ''
+			FROM user a LEFT JOIN blog b on a.id = b.id
+		]]>
+	</insert>
+</mapper>
