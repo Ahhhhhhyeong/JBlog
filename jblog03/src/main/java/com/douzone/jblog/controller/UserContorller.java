@@ -19,10 +19,6 @@ public class UserContorller {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/login")
-	public String login() {
-		return "user/login";
-	}
 	
 	@RequestMapping("/join")
 	public String join() {
@@ -37,5 +33,23 @@ public class UserContorller {
 	     }	      
 	     userService.join(userVo);	      
 	     return "redirect:/user/joinsuccess";
+	}
+	
+	@RequestMapping("/joinsuccess")
+	public String joinSuccess() {
+		return "user/joinsuccess";
+	}
+	
+	@RequestMapping(value="/auth")
+	public void auth() {		
+	}
+
+	@RequestMapping("/logout")
+	public void logout() {
+	}	
+	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login() {
+		return "user/login";
 	}
 }

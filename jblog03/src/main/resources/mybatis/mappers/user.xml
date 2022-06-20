@@ -7,10 +7,16 @@
 				into user (id, name, password)
 			values (#{id }, #{name }, #{password })
 		]]>
-		<![CDATA[
-			INSERT INTO blog (id, title, logo) 
-				SELECT a.id, concat(a.name, '의 블로그') as title, ''
-			FROM user a LEFT JOIN blog b on a.id = b.id
-		]]>
 	</insert>
+	
+	<select id="findByEmailandPwd" parameterType="map" resultType="uservo">
+		<![CDATA[
+			SELECT id, name
+			FROM user
+			WHERE id = #{id } 
+			 AND password = #{password }
+		]]>
+	</select>
+	
+	
 </mapper>

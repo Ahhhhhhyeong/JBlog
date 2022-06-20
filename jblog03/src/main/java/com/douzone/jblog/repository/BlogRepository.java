@@ -12,20 +12,18 @@ import org.springframework.stereotype.Repository;
 import com.douzone.jblog.vo.UserVo;
 
 @Repository
-public class UserRepository {
+public class BlogRepository {
+	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public boolean insert(@Valid UserVo userVo) {
-		return sqlSession.insert("user.insert", userVo) == 1;		
-	}
 
-	public UserVo getUser(String email, String password) {
+	public boolean setBasic(@Valid UserVo userVo) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", email);
-		map.put("password", password);
+		map.put("id", userVo.getId());
+		map.put("title", userVo.getName() + "의 블로그");
+		map.put("url", "/assets/gallery/default.jpg");		
 		
-		return sqlSession.selectOne("findByEmailandPwd", map);
+		return sqlSession.insert("blog.insertDefault", map) == 1;		
 	}
 
 }

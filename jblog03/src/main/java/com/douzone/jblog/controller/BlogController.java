@@ -16,12 +16,21 @@ import com.douzone.jblog.vo.UserVo;
 public class BlogController {
 
 	@ResponseBody
-	@RequestMapping({"","/{pathNo1}", "/{pathNo1}/{pathNo2}"})
+	@RequestMapping("")
 	public String index(
-			@PathVariable("id") String id,
-			@PathVariable("pathNo1") Optional<Long> pathNo1,
-			@PathVariable("pathNo2") Optional<Long> pathNo2
+			@PathVariable("id") String id
 			) {
+		
+		Long categoryNo = 0L;
+		Long postNo = 0L;
+		
+		return "BlogController.index("+id +", " + categoryNo + ", " + postNo + ")";
+	}
+	
+	@RequestMapping({"/{pathNo1}", "/{pathNo1}/{pathNo2}"})
+	public String index(@PathVariable("id") String id,
+			@PathVariable("pathNo1") Optional<Long> pathNo1,
+			@PathVariable("pathNo2") Optional<Long> pathNo2) {
 		
 		Long categoryNo = 0L;
 		Long postNo = 0L;
