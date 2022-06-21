@@ -25,5 +25,13 @@
 		]]>
 		
 	</update>
+	
+	<select id="find">
+		<![CDATA[
+			SELECT id, title
+			 FROM blog
+			where id = #{id }
+		]]>
+	</select>
 
 </mapper>

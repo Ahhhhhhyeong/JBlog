@@ -35,4 +35,8 @@ public class BlogRepository {
 		sqlSession.update("blog.updateBasic", vo);		
 	}
 
+	public BlogVo find(String id) {
+		return sqlSession.selectOne("blog.find", id);
+	}
+
 }

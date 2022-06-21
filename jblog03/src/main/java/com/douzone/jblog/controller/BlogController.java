@@ -65,6 +65,8 @@ public class BlogController {
 		model.addAttribute("postList", postList);
 		model.addAttribute("postVo", postVo);
 		
+		
+		
 		return "/blog/main";
 	}
 

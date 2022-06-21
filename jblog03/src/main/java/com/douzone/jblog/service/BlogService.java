@@ -20,5 +20,8 @@ public class BlogService {
 	public void updateBasic(BlogVo vo) {
 		blogRepository.updateBasic(vo);
 	}
+	public BlogVo getBlog(String id) {
+		return blogRepository.find(id);
+	}
 	
 }
