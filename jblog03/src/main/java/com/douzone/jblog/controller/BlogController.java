@@ -3,6 +3,8 @@ package com.douzone.jblog.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,11 +62,12 @@ public class BlogController {
 		List<PostVo> postList = postService.getfindAll(categoryNo, id);
 		PostVo postVo = postService.getfindOne(categoryNo, postNo, id);
 		
+				
 		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("categoryVo", list);	
 		model.addAttribute("postList", postList);
 		model.addAttribute("postVo", postVo);
-		
+				
 		
 		
 		return "/blog/main";

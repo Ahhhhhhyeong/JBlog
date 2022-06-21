@@ -22,9 +22,10 @@ public class SiteInterceptor implements HandlerInterceptor {
 		
 		ServletContext sc = request.getServletContext();
 			
-		HttpSession session = request.getSession();
-		UserVo userVo = (UserVo)session.getAttribute("authUser");
-		BlogVo blogVo = blogService.getBlog(userVo.getId());
+		String getUrl = request.getRequestURI();
+		System.out.println(getUrl);
+		
+		BlogVo blogVo = blogService.getBlog(getUrl);
 		sc.setAttribute("blog", blogVo);
 		
 		return true;
