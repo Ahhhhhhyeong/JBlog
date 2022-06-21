@@ -19,4 +19,16 @@ public class CategoryService {
 		return categoryRepository.getfindAll(id);
 	}
 
+	public List<CategoryVo> getfindCountAll(String id) {
+		return categoryRepository.getfindCountAll(id);
+	}
+
+	public void insert(CategoryVo vo) {
+		categoryRepository.insert(vo);
+	}
+
+	public void delete(String id, Long no) {
+		categoryRepository.delete(id, no);
+	}
+
 }

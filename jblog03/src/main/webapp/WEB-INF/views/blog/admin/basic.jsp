@@ -14,12 +14,12 @@
 		<c:import url="/WEB-INF/views/blog/includes/header.jsp" />
 		<div id="wrapper">
 			<div id="content" class="full-screen">
-				<ul class="admin-menu">
-					<li class="selected">기본설정</li>
-					<li><a href="">카테고리</a></li>
-					<li><a href="">글작성</a></li>
-				</ul>
-				<form action="${pageContext.request.contextPath}/${blogVo.id }/basic" method="post">
+			<ul class="admin-menu">
+				<li class="selected">기본설정</li>
+				<li><a href="${pageContext.request.contextPath}/${id}/category">카테고리</a></li>
+				<li><a href="${pageContext.request.contextPath}/${id}/write">글작성</a></li>
+			</ul>
+				<form action="${pageContext.request.contextPath}/${blogVo.id }/basic" method="post" enctype="multipart/form-data">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>

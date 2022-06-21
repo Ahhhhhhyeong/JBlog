@@ -32,4 +32,19 @@ public class CategoryRepository {
 		return sqlSession.selectList("category.findAll", id);
 	}
 
+	public List<CategoryVo> getfindCountAll(String id) {
+		return sqlSession.selectList("category.findCountAll", id);
+	}
+
+	public void insert(CategoryVo vo) {
+		sqlSession.insert("category.insert", vo);
+	}
+
+	public void delete(String id, Long no) {		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("no", no);
+		sqlSession.delete("category.delete", map);
+	}
+
 }
