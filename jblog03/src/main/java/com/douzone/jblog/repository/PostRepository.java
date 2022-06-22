@@ -39,6 +39,7 @@ public class PostRepository {
 	public void insert(PostVo vo) {
 		sqlSession.insert("post.insert", vo);
 	}
-	
+
+
 
 }

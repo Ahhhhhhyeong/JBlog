@@ -48,6 +48,8 @@
 			</otherwise>
 		</choose>
 	</select>
+	
+	
 
 	<insert id="insert" parameterType="postvo">
 		<![CDATA[

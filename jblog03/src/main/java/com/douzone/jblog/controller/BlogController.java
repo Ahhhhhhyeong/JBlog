@@ -3,8 +3,6 @@ package com.douzone.jblog.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +37,7 @@ public class BlogController {
 	@Autowired
 	private PostService postService;
 	
+	
 	@RequestMapping({"","/{pathNo1}", "/{pathNo1}/{pathNo2}"})
 	public String index(
 			@PathVariable("id") String id,
@@ -61,14 +60,12 @@ public class BlogController {
 		List<CategoryVo> list = categoryService.getfindAll(id);
 		List<PostVo> postList = postService.getfindAll(categoryNo, id);
 		PostVo postVo = postService.getfindOne(categoryNo, postNo, id);
-		
-				
+						
 		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("categoryVo", list);	
 		model.addAttribute("postList", postList);
-		model.addAttribute("postVo", postVo);
-				
-		
+		model.addAttribute("postVo", postVo);	
+		model.addAttribute("blog", blogVo.getTitle());
 		
 		return "/blog/main";
 	}
@@ -79,11 +76,13 @@ public class BlogController {
 			@AuthUser UserVo authUser, Model model) {
 		
 		if(!authUser.getId().equals(id)) {
-			return "redirect:/" ;
+			return "/blog/main" ;
 		}		
 		
 		BlogVo blogVo = blogService.getfindAll(id);
+		
 		model.addAttribute("blogVo", blogVo);
+		model.addAttribute("blog", blogService.getBlog(id));
 		
 		return "/blog/admin/basic";
 	}
@@ -114,9 +113,8 @@ public class BlogController {
 			return "redirect:/";
 		}	
 		List<CategoryVo> list = categoryService.getfindCountAll(id);
-		
 		model.addAttribute("list", list);
-		
+		model.addAttribute("blog", blogService.getBlog(id));
 		return "/blog/admin/category";
 	}
 	
@@ -126,7 +124,7 @@ public class BlogController {
 			@AuthUser UserVo authUser,
 			CategoryVo vo) {
 		if(!authUser.getId().equals(id)) {
-			return "redirect:/";
+			return "/blog/main";
 		}
 		vo.setBlog_id(id);
 		categoryService.insert(vo);
@@ -141,15 +139,14 @@ public class BlogController {
 			@AuthUser UserVo authUser,
 			@PathVariable("no") Optional<Long> pathNo) {
 		if(!authUser.getId().equals(id)) {
-			return "redirect:/";
+			return "/blog/main";
 		}
-		
 		Long no = 0L;
 		
 		if(pathNo.isPresent()) { // 객체 존재여부 확인
 			no = pathNo.get();
 		}
-				
+		
 		categoryService.delete(id, no);
 		
 		return "redirect:/"+ id +"/category";
@@ -163,12 +160,13 @@ public class BlogController {
 			@AuthUser UserVo authUser,
 			Model model) {
 		if(!authUser.getId().equals(id)) {
-			return "redirect:/";
+			return "/blog/main";
 		}
 		
 		List<CategoryVo> list = categoryService.getfindAll(id);
-		model.addAttribute("list", list);
 		
+		model.addAttribute("list", list);
+		model.addAttribute("blog", blogService.getBlog(id));
 		return "/blog/admin/write";
 	}
 	

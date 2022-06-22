@@ -27,8 +27,18 @@ public class CategoryService {
 		categoryRepository.insert(vo);
 	}
 
-	public void delete(String id, Long no) {
+	public boolean delete(String id, Long no) {
+		//삭제 조건 
+		if(categoryRepository.getfindCount(no) > 0L) { //카테고리안에 게시글이 1개 이상 있을 때 삭제 못하게
+			return false;
+		}
+		
+		if(categoryRepository.findCountCategory(id) == 1L) { // 카테고리개수가 1개일 때, 삭제 못하게
+			return false;
+		}
+		
 		categoryRepository.delete(id, no);
+		return true;
 	}
 
 }

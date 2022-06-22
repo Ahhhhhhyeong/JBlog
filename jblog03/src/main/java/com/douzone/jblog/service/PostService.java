@@ -13,14 +13,15 @@ public class PostService {
 
 	@Autowired
 	private PostRepository postRepository;
-
+	
 	public List<PostVo> getfindAll(Long categoryNo, String id) { // 게시판 목차 나타낼거
 		if(categoryNo == 0) {
 			return postRepository.getfindBlogId(id);
 		}
 		return postRepository.getfindCategoryNo(categoryNo);
 	}
-
+	
+	
 	public PostVo getfindOne(Long categoryNo, Long postNo, String id) {
 		if(categoryNo == 0 && postNo == 0) {
 			return postRepository.getfindBlogIdOne(id);

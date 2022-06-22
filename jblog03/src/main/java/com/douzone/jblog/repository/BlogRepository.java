@@ -22,7 +22,7 @@ public class BlogRepository {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", userVo.getId());
 		map.put("title", userVo.getName() + "의 블로그");
-		map.put("url", "/assets/gallery/default.jpg");		
+		map.put("url", "/assets/logo/default.jpg");		
 		
 		return sqlSession.insert("blog.insertDefault", map) == 1;		
 	}
@@ -35,7 +35,7 @@ public class BlogRepository {
 		sqlSession.update("blog.updateBasic", vo);		
 	}
 
-	public BlogVo find(String id) {
+	public String find(String id) {
 		return sqlSession.selectOne("blog.find", id);
 	}
 

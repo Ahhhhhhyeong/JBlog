@@ -26,9 +26,9 @@
 		
 	</update>
 	
-	<select id="find">
+	<select id="find"  parameterType="string" resultType="string">
 		<![CDATA[
-			SELECT id, title
+			SELECT title
 			 FROM blog
 			where id = #{id }
 		]]>

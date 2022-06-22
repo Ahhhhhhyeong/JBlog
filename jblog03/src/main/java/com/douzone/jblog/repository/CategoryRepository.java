@@ -47,4 +47,12 @@ public class CategoryRepository {
 		sqlSession.delete("category.delete", map);
 	}
 
+	public long getfindCount(Long no) {
+		return sqlSession.selectOne("category.findCount", no);
+	}
+
+	public long findCountCategory(String id) {
+		return sqlSession.selectOne("category.findCountCategory", id);
+	}
+
 }
