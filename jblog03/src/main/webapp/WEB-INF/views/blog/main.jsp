@@ -22,8 +22,7 @@ pageContext.setAttribute("newLine", "\n");
 			<div id="content">
 				<div class="blog-content">
 					<h4>${postVo.title }</h4>
-					<p>${fn:replace(postVo.contents, newLine, "<br/>") }
-					<p>
+					<p>${fn:replace(postVo.contents, newLine, "<br/>") }</p>
 				</div>
 				<ul class="blog-list">
 					<c:forEach items='${postList }' var='vo'>

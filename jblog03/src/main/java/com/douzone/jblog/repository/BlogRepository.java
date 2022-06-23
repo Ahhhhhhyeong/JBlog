@@ -22,7 +22,7 @@ public class BlogRepository {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", userVo.getId());
 		map.put("title", userVo.getName() + "의 블로그");
-		map.put("url", "/assets/logo/default.jpg");		
+		map.put("url", "/assets/logo/2022523103555179.jpg");		
 		
 		return sqlSession.insert("blog.insertDefault", map) == 1;		
 	}
