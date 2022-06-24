@@ -21,7 +21,7 @@ public class UserContorller {
 	
 	
 	@RequestMapping("/join")
-	public String join() {
+	public String join(@ModelAttribute UserVo userVo) {
 		return "user/join";
 	}
 	
