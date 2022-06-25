@@ -17,12 +17,24 @@
 	</select>
 	
 	<update id="updateBasic" parameterType="blogvo">
-		<![CDATA[
-			UPDATE blog SET 
-				title = #{title },
-			    logo = #{logo }
-			WHERE id = #{id }						
-		]]>
+		<choose>
+			<when test="logo == null">
+				<![CDATA[
+					UPDATE blog SET 
+						title = #{title }
+					WHERE id = #{id }						
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					UPDATE blog SET 
+						title = #{title },
+					    logo = #{logo }
+					WHERE id = #{id }						
+				]]>
+			</otherwise>
+		</choose>
+		
 		
 	</update>
 	

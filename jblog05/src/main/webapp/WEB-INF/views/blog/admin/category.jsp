@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div id="container">
-		<c:import url="/WEB-INF/views/blog/includes/header.jsp" />		
+		<c:import url="/WEB-INF/views/blog/includes/adminHeader.jsp" />		
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
@@ -40,19 +40,21 @@
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
-      			<form action="${pageContext.request.contextPath}/${id }/admin/category" method="post" >
+      			<form
+      			 action="${pageContext.request.contextPath}/${id }/admin/category" 
+      			 method="post" >
 			      	<table id="admin-cat-add">
 			      		<tr>
 			      			<td class="t">카테고리명</td>
-			      			<td><input type="text" name="name"></td>
+			      			<td><input type="text" name="name" /></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">설명</td>
-			      			<td><input type="text" name="description"></td>
+			      			<td><input type="text" name="description" /></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="s">&nbsp;</td>
-			      			<td><input type="submit" value="카테고리 추가"></td>
+			      			<td><input type="submit" value="카테고리 추가" /></td>
 			      		</tr>      		      		
 			      	</table> 
 		      	</form>

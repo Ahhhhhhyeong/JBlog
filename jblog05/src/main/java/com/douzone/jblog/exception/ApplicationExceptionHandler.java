@@ -46,7 +46,9 @@ public class ApplicationExceptionHandler {
 	public String handlerException(Model model, NullPointerException e) {
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
+		
 		LOGGER.error(errors.toString());
+		LOGGER.debug("::nullPointer::", e);
 		
 		return "redirect:/";
 	}

@@ -68,24 +68,23 @@ public class BlogController {
 		BlogVo blogVo = blogService.getfindAll(id);
 
 		model.addAttribute("blogVo", blogVo);
-		model.addAttribute("blog", blogVo.getId());
-		
-		
+		model.addAttribute("blog", blogVo.getId());	
 
 		return "/blog/admin/basic";
 	}
 
 	@Auth
-	@RequestMapping(value = "/admin/basic", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/update", method = RequestMethod.POST)
 	public String adminBasic(@PathVariable("id") String id, @AuthUser UserVo authUser,
-			@RequestParam("logo-file") MultipartFile multipartFile, BlogVo vo) throws FileUploadException {
+			@RequestParam("logo-file") MultipartFile multipartFile,
+			BlogVo vo) throws FileUploadException {
 
 		String url = fileUploadService.restoreImage(multipartFile);
 		vo.setLogo(url);
 		vo.setId(authUser.getId());
 		blogService.updateBasic(vo);
 
-		return "redirect:/" + id;
+		return "redirect:/" + id + "/admin/basic";
 	}
 
 	@Auth
