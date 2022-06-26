@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
@@ -33,25 +32,7 @@ public class ApplicationExceptionHandler {
 		return "error/exception";
 	}
 		
-	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
-	public String handlerException(Model model, MethodArgumentTypeMismatchException e) {
-		StringWriter errors = new StringWriter();
-		e.printStackTrace(new PrintWriter(errors));
-		LOGGER.error(errors.toString());
-		
-		return "redirect:/";
-	}
+
 	
-	@ExceptionHandler(NullPointerException.class)
-	public String handlerException(Model model, NullPointerException e) {
-		StringWriter errors = new StringWriter();
-		e.printStackTrace(new PrintWriter(errors));
-		
-		LOGGER.error(errors.toString());
-		LOGGER.debug("::nullPointer::", e);
-		
-		return "redirect:/";
-	}
-	
-	
+
 }

@@ -20,7 +20,7 @@
 				<li><a href="${pageContext.request.contextPath}/${id}/admin/write">글작성</a></li>
 			</ul>
 				<form	 
-				 action="${pageContext.request.contextPath}/${blogVo.id }/admin/update" 
+				 action="${pageContext.request.contextPath}/${id}/admin/update" 
 				 method="post" 
 				 enctype="multipart/form-data">
 					

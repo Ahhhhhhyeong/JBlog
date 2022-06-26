@@ -39,6 +39,8 @@ public class FileUploadService {
 			return URL_BASE + "/" + saveFileName;
 		} catch (IOException e) {
 			throw new FileUploadException("file upload error:" + e);
+		}catch(NullPointerException exception) {
+			throw new NullPointerException("nullTest"+exception);
 		}
 	}
 

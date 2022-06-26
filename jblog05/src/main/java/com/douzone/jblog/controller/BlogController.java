@@ -78,11 +78,11 @@ public class BlogController {
 	public String adminBasic(@PathVariable("id") String id, @AuthUser UserVo authUser,
 			@RequestParam("logo-file") MultipartFile multipartFile,
 			BlogVo vo) throws FileUploadException {
-
+		
 		String url = fileUploadService.restoreImage(multipartFile);
 		vo.setLogo(url);
 		vo.setId(authUser.getId());
-		blogService.updateBasic(vo);
+		blogService.updateBasic(vo);	
 
 		return "redirect:/" + id + "/admin/basic";
 	}
