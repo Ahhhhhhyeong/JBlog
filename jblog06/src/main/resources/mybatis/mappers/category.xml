@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="category">
+	<insert id="insertDefault"  parameterType="map" >
+		<![CDATA[
+			INSERT INTO category (name, description, blog_id)
+				VALUES (#{name }, #{description }, #{blog_id })
+		]]>	
+	</insert>	
+	
+	<select id="findAll" parameterType="string" resultType="categoryvo">
+		<![CDATA[
+			SELECT no, name, description, blog_id
+			 FROM category
+			where blog_id = #{id }
+		]]>
+	</select>
+	
+	<select id="findCountAll" parameterType="string"  resultType="categoryvo">
+		<![CDATA[
+			SELECT a.no, a.name, a.description, count(b.no) as count
+				FROM category a left join post b
+					on a.no = b.category_no
+				where blog_id = #{id } 
+			group by a.no, a.name, a.description;
+		]]>
+	</select>
+	
+	<select id="findCount" parameterType="long" resultType="long">
+		<![CDATA[
+			SELECT count(b.no) as count
+				FROM category a left join post b
+					on a.no = b.category_no
+				where  a.no = #{no }
+		]]>	
+	</select>
+	
+	<select id="findCountCategory" parameterType="string" resultType="long">
+		<![CDATA[
+			SELECT count(a.no) as count
+				FROM category a 
+			where a.blog_id = #{id }
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="categoryvo">
+		<![CDATA[
+			insert into category (name, description, blog_id)
+						  values (#{name}, #{description},#{blog_id});
+		]]>
+	</insert>
+	
+	<delete id="delete" parameterType="map">
+		<![CDATA[
+			delete from category where no = #{no } and blog_id = #{id }
+		]]>
+	</delete>
+	
+</mapper>
