@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
 public class ApplicationExceptionHandler {
@@ -17,11 +16,6 @@ public class ApplicationExceptionHandler {
 	
 	@ExceptionHandler(Exception.class)
 	public String handlerException(Model model, Exception e) {
-		
-		if(e instanceof NoHandlerFoundException) {
-			return "error/404";
-		}
-		
 		//1. 로깅(logging)
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
@@ -29,10 +23,10 @@ public class ApplicationExceptionHandler {
 		
 		//2. 사과 페이지(종료)
 		model.addAttribute("exception", errors.toString());
+		model.addAttribute("model", model);
 		return "error/exception";
 	}
-		
-
 	
-
+	
+	
 }

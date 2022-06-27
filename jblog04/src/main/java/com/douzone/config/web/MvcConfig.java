@@ -12,7 +12,8 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
-	
+
+	// ViewResolver 설정
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -22,11 +23,14 @@ public class MvcConfig implements WebMvcConfigurer {
 		
 		return viewResolver;
 	}
-
+	
+	
+	// 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
+	
 	
 	
 }

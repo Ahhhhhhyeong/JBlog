@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.douzone.jblog.exception.FileUploadException;
-import com.douzone.jblog.security.Auth;
 import com.douzone.jblog.security.AuthUser;
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.service.CategoryService;
@@ -62,23 +61,37 @@ public class BlogController {
 		return "/blog/main";
 	}
 
-	@Auth
 	@RequestMapping("/admin/basic")
-	public String adminBasic(@PathVariable("id") String id, Model model) {
+	public String adminBasic(@PathVariable("id") String id, UserVo authUser, Model model) {
+
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		
+		if (!authUser.getId().equals(id)) {
+			return "redirect:/";
+		}
+			
+
 		BlogVo blogVo = blogService.getfindAll(id);
 
 		model.addAttribute("blogVo", blogVo);
-		model.addAttribute("blog", blogVo.getId());
-		
-		
+		model.addAttribute("blog", blogService.getBlog(id));
 
 		return "/blog/admin/basic";
 	}
 
-	@Auth
 	@RequestMapping(value = "/admin/basic", method = RequestMethod.POST)
 	public String adminBasic(@PathVariable("id") String id, @AuthUser UserVo authUser,
 			@RequestParam("logo-file") MultipartFile multipartFile, BlogVo vo) throws FileUploadException {
+
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		
+		if (!authUser.getId().equals(id)) {
+			return "redirect:/";
+		}
 
 		String url = fileUploadService.restoreImage(multipartFile);
 		vo.setLogo(url);
@@ -88,31 +101,49 @@ public class BlogController {
 		return "redirect:/" + id;
 	}
 
-	@Auth
 	@RequestMapping("/admin/category")
-	public String adminCategory(@PathVariable("id") String id, Model model) {
+	public String adminCategory(@PathVariable("id") String id, @AuthUser UserVo authUser, Model model) {
 
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		
+		if (!authUser.getId().equals(id)) {
+			return "redirect:/";
+		}
 		List<CategoryVo> list = categoryService.getfindCountAll(id);
 		model.addAttribute("list", list);
 		model.addAttribute("blog", blogService.getBlog(id));
 		return "/blog/admin/category";
 	}
 
-	@Auth
 	@RequestMapping(value = "/admin/category", method = RequestMethod.POST)
-	public String adminCategory(@PathVariable("id") String id, CategoryVo vo) {
+	public String adminCategory(@PathVariable("id") String id, @AuthUser UserVo authUser, CategoryVo vo) {
 
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		
+		if (!authUser.getId().equals(id)) {
+			return "redirect:/";
+		}
 		vo.setBlog_id(id);
 		categoryService.insert(vo);
 
-		return "redirect:/" + id + "/category";
+		return "redirect:/" + id + "/admin/category";
 	}
 
-	@Auth
 	@RequestMapping(value = "/admin/category/delete/{no}", method = RequestMethod.GET)
-	public String adminCategoryDelete(@PathVariable("id") String id,
+	public String adminCategoryDelete(@PathVariable("id") String id, @AuthUser UserVo authUser,
 			@PathVariable("no") Optional<Long> pathNo) {
 
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		
+		if (!authUser.getId().equals(id)) {
+			return "redirect:/";
+		}
 		Long no = 0L;
 
 		if (pathNo.isPresent()) { // 객체 존재여부 확인
@@ -121,12 +152,19 @@ public class BlogController {
 
 		categoryService.delete(id, no);
 
-		return "redirect:/" + id + "/category";
+		return "redirect:/" + id + "/admin/category";
 	}
 
-	@Auth
 	@RequestMapping("/admin/write")
-	public String adminWrite(@PathVariable("id") String id, Model model) {
+	public String adminWrite(@PathVariable("id") String id, @AuthUser UserVo authUser, Model model) {
+
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		
+		if (!authUser.getId().equals(id)) {
+			return "redirect:/";
+		}
 
 		List<CategoryVo> list = categoryService.getfindAll(id);
 
@@ -135,12 +173,19 @@ public class BlogController {
 		return "/blog/admin/write";
 	}
 
-	@Auth
 	@RequestMapping(value = "/admin/write", method = RequestMethod.POST)
-	public String adminWrite(@PathVariable("id") String id, PostVo vo) {
+	public String adminWrite(@PathVariable("id") String id, @AuthUser UserVo authUser, PostVo vo) {
+
+		if(authUser == null) {
+			return "redirect:/";
+		}
 		
+		if (!authUser.getId().equals(id)) {
+			return "redirect:/";
+		}
+
 		postService.insert(vo);
-		
+
 		return "redirect:/" + id;
 	}
 

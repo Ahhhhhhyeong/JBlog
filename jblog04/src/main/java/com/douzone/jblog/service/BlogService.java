@@ -14,9 +14,7 @@ public class BlogService {
 	private BlogRepository blogRepository;
 	
 	public BlogVo getfindAll(String id) {
-		BlogVo blogVo = blogRepository.getfindAll(id);
-		
-		return blogVo;
+		return blogRepository.getfindAll(id);
 	}
 	
 	public void updateBasic(BlogVo vo) {

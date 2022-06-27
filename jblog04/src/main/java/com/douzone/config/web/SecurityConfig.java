@@ -16,17 +16,20 @@ import com.douzone.jblog.security.LogoutInterceptor;
 
 @Configuration
 public class SecurityConfig implements WebMvcConfigurer {
-	
+
+	// Argument Resolver
 	@Bean
 	public HandlerMethodArgumentResolver handlerMethodArgumentResolver() {
 		return new AuthUserHandlerMethodArgumentResolver();
 	}
-
+	
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-		resolvers.add(null);
+		resolvers.add(handlerMethodArgumentResolver()); 
 	}
+
 	
+	// Interceptors
 	@Bean
 	public HandlerInterceptor loginInterceptor() {
 		return new LoginInterceptor();
@@ -41,22 +44,28 @@ public class SecurityConfig implements WebMvcConfigurer {
 	public HandlerInterceptor authInterceptor() {
 		return new AuthInterceptor();
 	}
-
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(loginInterceptor())
-				.addPathPatterns("/user/auth");
+		registry
+		.addInterceptor(loginInterceptor())
+		.addPathPatterns("/user/auth");
+
+	registry
+		.addInterceptor(logoutInterceptor())
+		.addPathPatterns("/user/logout");
+
+	registry
+		.addInterceptor(authInterceptor())
+		.addPathPatterns("/**")
+		.excludePathPatterns("/assets/**")
+		.excludePathPatterns("/user/auth")
+		.excludePathPatterns("/user/logout");
 		
-		registry.addInterceptor(logoutInterceptor())
-				.addPathPatterns("/user/logout");
-		
-		registry.addInterceptor(authInterceptor())
-				.addPathPatterns("/{id}/admin/basic")
-				.excludePathPatterns("/assets/**")
-				.excludePathPatterns("/user/auth")
-				.excludePathPatterns("/user/logout");
-	}
+	}	
 	
 	
 	
+	
+
 }

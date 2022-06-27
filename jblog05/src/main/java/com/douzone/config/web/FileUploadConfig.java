@@ -17,20 +17,20 @@ public class FileUploadConfig implements WebMvcConfigurer {
 	@Autowired
 	private Environment env;
 
-	// MVC Resource Mapping
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler(env.getProperty("fileupload.resourceMapping"))
-				.addResourceLocations("file:" + env.getProperty("fileupload.uploadLocation"));
-	}
-
-	// Multipart Resolver
 	@Bean
 	public MultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		multipartResolver.setMaxInMemorySize(env.getProperty("fileupload.maxInMemorySize", Integer.class));
 		multipartResolver.setMaxUploadSize(env.getProperty("fileupload.maxUploadSize", Long.class));
-		multipartResolver.setDefaultEncoding(env.getProperty("fileupload.defaultEncoding"));
+		multipartResolver.setDefaultEncoding(env.getProperty("fileupload.defaultEncodin"));
+
 		return multipartResolver;
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry
+			.addResourceHandler(env.getProperty("fileupload.resourceMapping"))
+			.addResourceLocations("file:" + env.getProperty("fileupload.uploadLocation"));
 	}
 }

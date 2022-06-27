@@ -13,7 +13,7 @@ import com.douzone.jblog.exception.FileUploadException;
 
 @Service
 public class FileUploadService {
-	private static String SAVE_PATH = "/jblog-uploads/";
+	private static String SAVE_PATH = "/jblog-uploads";
 	private static String URL_BASE = "/assets/logo";
 
 	public String restoreImage(MultipartFile multipartfile) throws FileUploadException {
@@ -39,8 +39,6 @@ public class FileUploadService {
 			return URL_BASE + "/" + saveFileName;
 		} catch (IOException e) {
 			throw new FileUploadException("file upload error:" + e);
-		}catch(NullPointerException exception) {
-			throw new NullPointerException("nullTest"+exception);
 		}
 	}
 

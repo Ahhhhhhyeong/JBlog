@@ -30,7 +30,7 @@ public class JblogWebApplicationInitializer extends AbstractAnnotationConfigDisp
 
 	@Override
 	protected Filter[] getServletFilters() {
-		return new Filter[] {new CharacterEncodingFilter("utf-8")}; 
+		return new Filter[] {new CharacterEncodingFilter("UTF-8")};
 	}
 
 	@Override
@@ -39,5 +39,6 @@ public class JblogWebApplicationInitializer extends AbstractAnnotationConfigDisp
 		servlet.setThrowExceptionIfNoHandlerFound(true);
 		return servlet;
 	}
-
+	
+	
 }

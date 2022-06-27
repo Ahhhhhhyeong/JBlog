@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div id="container">
-		<c:import url="/WEB-INF/views/blog/includes/adminHeader.jsp" />
+		<c:import url="/WEB-INF/views/blog/includes/header.jsp" />
 		
 		<div id="wrapper">
 			<div id="content" class="full-screen">
